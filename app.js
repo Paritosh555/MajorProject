@@ -28,7 +28,7 @@ const session = require("express-session"); //-----------------session pakage re
 const MongoStore = require('connect-mongo'); // yachyasathi pn express session lagete
 const flash = require("connect-flash");//-----------------------flash require
 
-const passport = require("passport");//--------------------------passport package require   // passport sathi 3 pakege astat tyatli 2 hite ani signup schama pashi
+const passport = require("passport");//--------------------------passport package require  
 const LocalStrategy = require("passport-local");//----------------passport package2 require
 const User = require("./models/user.js");//--------------------------User model require
 
@@ -40,23 +40,6 @@ const reviews  = require("./routes/review.js");//---------------------router rev
 
 const users = require("./routes/user.js");//---------------------------router user file require
 
-//--------------------------------------------------------Original Mongodb connection------------------------------------------------------------------------
-
-// try{ 
-//     main()
-//     .then(()=>{
-//     console.log("connection successfully");
-//      });
-// }
-// catch(err)
-// {
-//      console.log(err)
-// };
-
-// async function main() {
-//   await mongoose.connect('mongodb://127.0.0.1:27017/wanderlust');
-
-// };
 
 //--------------------------------------------------------------Project Deployment Mongodb conection---------------------------------------------------------------
 
@@ -77,8 +60,6 @@ await mongoose.connect(dbUrl);
 
 };
 
-// mongo store option-----------------------------------------------------------he apla database internet ver pathvnyasathi use-- he direct session madhe pn lihu shakto 
-// pn direct variable defind karun lihne tyat option lihne ani seession madhe store karne last step project zalya nunter karne
 
 const store =  MongoStore.create({
     mongoUrl:dbUrl, // jo apn databse mongoatlas vr pathvnyasathi definde kelay to
@@ -123,22 +104,11 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser()); 
 
 
-// app.get("/demoUser",async(req,res)=>{
-
-//       let user1  = new User({
-
-//           email:"paritosh@gmail.com",
-//           username:"paritosh",
-//       });
-
-//      let us = await User.register(user1,"paritosh");
-//      console.log(us);
-// })
 
 //-------------------------------------------------------------Flash-Massege midleware--------------------------------------
 
 app.use((req,res,next)=>{
-  res.locals.success = req.flash("success");                                                 // ha middleware nehmi session and flash declerationchya khali pahije
+  res.locals.success = req.flash("success");                                                
   res.locals.error = req.flash("error");
   res.locals.currentUser = req.user;
   next();
@@ -160,7 +130,7 @@ let validateReview = (req,res,next)=>{
 }
 
 //-----------------------------------------join listings route in routes folder----------------------------------------------------------------
-app.use("/listings", listings); // saglyat comman ky ahe te kadhaych
+app.use("/listings", listings); 
 
 //----------------------------------------join review route in routes folder---------------------------------------------------
 
